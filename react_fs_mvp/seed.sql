@@ -11,7 +11,7 @@ Blog_Title will be Boolean, Variables, Objects, and Node JS.
 INSERT INTO Notes_Blog (Blog_Title, Blog_Entry) VALUES ('Booleans', 'Booleans are conditionals with true or false values.');
 INSERT INTO Notes_Blog (Blog_Title, Blog_Entry) VALUES ('Variables', 'Variables are mutable but store immutable values.');
 INSERT INTO Notes_Blog (Blog_Title, Blog_Entry) VALUES ('Objects', 'Objects store properties in key:value pairs.');
-INSERT INTO Notes_Blog (Blog_Title, Blog_Entry) VALUES ('Node JS', 'Node JS is a runtime that uses the Chome V8 engine.');
+INSERT INTO Notes_Blog (Blog_Title, Blog_Entry) VALUES ('Node JS', 'Node JS is a runtime that uses the Chrome V8 engine.');
 
 /*MIGRATION
 - Seed the database using the following command: psql Blog_Notes -f seed.sql
@@ -27,12 +27,18 @@ INSERT INTO Notes_Blog (Blog_Title, Blog_Entry) VALUES ('Node JS', 'Node JS is a
 /*TESTING RESTful ROUTES
 - Use an API such as Postman. It is advisable to download the Postman app.
 - Steps for testing with Postman:
-    1. Install nodemon, a tool that automatically restarts the application when 
-    a change is detected. Use the command 'npm install nodemon'.
-    2. Start the server by running the command 'node server.js'. 
-    3. Verify that the serer is listening by inspecting the console in VS Code. If 
+    1. Start the server by running the command 'node server.js'. 
+    2. Verify that the serer is listening by inspecting the console in VS Code. If 
     'Listening on port 8000' is printed, the server is running.
     3. Open the Postman app.
-    4. We will test the GET all route first. In the drop-down menue, select GET.
-    5. In the input box containing the text 'Enter request URL', type in the
-    following: localhost:8000
+    4. Test the GET ALL route first. 
+        - In the drop-down menu, select GET.
+        - In the input box containing the text 'Enter request URL', type the
+        following: 'localhost:8000/Notes_Blog'. 
+        - In the Postman console, click on 'Body'.
+        - Click 'Send'.
+        - The entities will appear in JSON. Success!
+    5. Test the GET ONE route by adding the id.
+        - On postman, type the following: 'localhost:8000/Notes_Blog/1'.
+        - The first entity in the seed.sql has the id of 1, the second has an id of 2
+        and so on.

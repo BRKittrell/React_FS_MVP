@@ -49,34 +49,47 @@ app.use(cors())
 /*CRUD FUNCTIONALITY
 We will now create RESTful routes for POST, GET, PATCH, and UPDATE*/
 
-/*GET ALL -> retrieves all entities from the table(s).*/
-app.get('Notes_Blog', async (req, res) => {
+/*POST ONE -> creates new entity*/
+app.post('/Notes_Blog', async (req, res) => {
     try{
-        const {rows} = await pool.query('SELECT * FROM Notes_Blog');
-        res.status(200).send(rows);
-    }catch (error){
-        res.send(err);
-        console.log(err);
-    }
-})
-
-/*GET ONE -> retrieves a signle entry based on id parameters.*/
-app.get('Notes_Blog/:id', async (req,res) => {
-    try{
-        const {rows} = await pool.query('SELECT * FROM Notes_Blog WHERE Blog_Number =$1', [id]);
-        res.status(200).send(rows);
-    }catch (error){
-        res.send(err);
+        const {Blog_Title, Blog_Entry} = req.body;
+        const {rows} = await pool.query('INSERT INTO Notes_Blog (Blog_Title, Blog_Entry) VALUES ($1, $2) RETURNING *;', [Blog_Title, Blog_Entry]);
+        res.send(rows);
+    }catch(err){
+        res.send(err).status(404);
         console.log(err);
     }
 });
 
-/*UPDATE -> updates a single entry based on id parameters.*/
-app.patch('Notes_Blog/:id', async (req, res) => {
+/*GET ALL -> retrieves all entities from the table(s).*/
+app.get('/Notes_Blog', async (req, res) => {
+    try{
+        const {rows} = await pool.query('SELECT * FROM Notes_Blog');
+        res.status(200).send(rows);
+    }catch (err){
+        res.send(err);
+        console.log('Cannot get all')
+    }
+})
+
+/*GET ONE -> retrieves a signle entry based on id parameters.*/
+app.get('/Notes_Blog/:id', async (req,res) => {
+    try{
+        const {id} = req.params;
+        const {rows} = await pool.query('SELECT * FROM Notes_Blog WHERE Blog_Number =$1;', [id]);
+        res.status(200).send(rows);
+    }catch (err){
+        res.send(err);
+        console.log("Oops! That blog entry doesn't exist.");
+    }
+});
+
+/*UPDATE ONE -> updates a single entry based on id parameters.*/
+app.patch('/Notes_Blog/:id', async (req, res) => {
     try{
         const {id} = req.params;
         const {Blog_Title, Blog_Entry} = req.body;
-        const {rows} =await pool.query('UPDATE Notes_Blog SET Blog_Title = $1, Blog_Entry = $2 WHERE Blog_Number = $3', [Blog_Title, Blog_Entry, id])
+        const {rows} =await pool.query('UPDATE Notes_Blog SET Blog_Title = $1, Blog_Entry = $2 WHERE Blog_Number = $3;', [Blog_Title, Blog_Entry, id])
         res.status(200).send(rows)
     }catch (err){
         res.status(404).send(err);
@@ -84,10 +97,11 @@ app.patch('Notes_Blog/:id', async (req, res) => {
     }
 });
 
-app.delete('Notes_Blog/:id', async (req, res) =>{
+/*DELETE ONE -> deletes a single entry base on id parameters.*/
+app.delete('/Notes_Blog/:id', async (req, res) =>{
     try{
         const {id} = req.params;
-        await pool.query('DELETE FROM Notes_Blog WHERE Blog_Number = $1',[id]);
+        await pool.query('DELETE FROM Notes_Blog WHERE Blog_Number = $1;',[id]);
         res.status(200).send(`Blog entry ${id} has been deleted.`);
     }catch (err){
         res.status(404).send(`Blog entry ${id} does not exist.`);

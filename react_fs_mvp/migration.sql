@@ -15,7 +15,8 @@ and primary key; see PostgreSQL documentation for datatypes.*/
 - The char datatype is for storing character strings of fixed length.
 - The varchar dataype is used to store character strings of variable length.
 */
-
+CREATE DATABASE Notes_Blog;
+DROP DATABASE Notes_Blog;
 DROP TABLE IF EXISTS Notes_Blog;
 CREATE TABLE Notes_Blog (
 Blog_Number serial PRIMARY KEY,
