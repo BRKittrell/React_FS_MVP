@@ -20,7 +20,7 @@ DROP DATABASE Notes_Blog;
 DROP TABLE IF EXISTS Notes_Blog;
 CREATE TABLE Notes_Blog (
 Blog_Number serial PRIMARY KEY,
-Blog_Title char(50),
+Blog_Title char(25),
 Blog_Entry varchar
 );
 
