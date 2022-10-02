@@ -2,6 +2,13 @@ import React from "react"
 import axios from "axios"
 import './App.css';
 
+import CreatePost from "./components/CreatePost"
+import DeletePost from "./components/DeletePost";
+import EditPost from "./components/EditPost";
+import ReadAll from "./components/ReadAll";
+import ReadOne from "./components/ReadOne";
+
+
 function App() {
   return (
     <div className="App">
