@@ -20,5 +20,6 @@
         - touch EditPost.js
         - touch ReadAll.js
         - touch ReadOne.js
-5. Export the components. This is accomplished using the export and default keywords. For example: 'export default CreatePost'. (See each compoent.)
+5. Component Imports and Exports. 
+- Import React in each component using the keywords 'import' and 'from'; syntax: 'import React from "react".- Export components using the export and default keywords. For example: 'export default CreatePost'. (See each compoent.) This allows importing to the parent, which is App.js.
 6. Import each component to the App.js file using the keywords import and from and file path. Example syntax: 'import CreatePost from './components/CreatePost'. 
